@@ -36,7 +36,7 @@ jobs:
         run: npm run rebuild
 
       - name: Build macOS distributable
-        run: npm run dist:mac
+        run: npx electron-builder --mac --publish never
         env:
           # No signing certificate in CI — disable auto-discovery so the build
           # doesn't hard-fail looking for a keychain identity.
@@ -79,7 +79,7 @@ jobs:
         run: npm run rebuild
 
       - name: Build Windows distributable
-        run: npm run dist:win
+        run: npx electron-builder --win --publish never
 
       - name: Upload Windows artifacts
         uses: actions/upload-artifact@v4
