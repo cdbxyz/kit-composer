@@ -55,7 +55,7 @@
       "window": { "width": 540, "height": 380 }
     },
     "win": {
-      "icon": "assets/icon.ico",
+      "icon": "assets/icon.png",
       "target": [
         { "target": "nsis", "arch": ["x64"] }
       ]
