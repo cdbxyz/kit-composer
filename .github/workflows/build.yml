@@ -43,6 +43,12 @@ jobs:
           # To enable signing: add CSC_LINK + CSC_KEY_PASSWORD GitHub Secrets.
           CSC_IDENTITY_AUTO_DISCOVERY: false
 
+      - name: Ad-hoc sign the app bundle
+        run: |
+          find dist -name "*.app" | while read app; do
+            codesign --sign - --deep --force --preserve-metadata=entitlements,requirements,flags "$app"
+          done
+
       - name: Upload macOS artifacts
         uses: actions/upload-artifact@v4
         with:
