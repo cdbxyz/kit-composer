@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: file:; font-src file:;" />
+  <title>Fanatics Kit Composer</title>
+  <link rel="stylesheet" href="styles/app.css" />
+  <link rel="stylesheet" href="styles/assets-panel.css" />
+  <link rel="stylesheet" href="styles/roster.css" />
+  <link rel="stylesheet" href="styles/roster-preview.css" />
+  <link rel="stylesheet" href="styles/export.css" />
+  <link rel="stylesheet" href="styles/profile.css" />
+  <link rel="stylesheet" href="styles/composite.css" />
+</head>
+<body>
+  <div id="app">
+    <header id="toolbar">
+      <div class="app-brand">
+        <img src="images/fanatics-logo.png" class="app-logo" alt="Fanatics" />
+        <span class="app-title">Fanatics Kit Composer</span>
+      </div>
+      <div class="export-btn-group">
+        <button id="btn-export-player" title="Export the current player as a single AVIF">Export Player</button>
+        <button id="btn-export-all"    title="Export all roster players as AVIF in a ZIP">Export All</button>
+      </div>
+    </header>
+
+    <main id="workspace">
+      <!-- Left: Assets panel (filled by AssetsPanel.js) -->
+      <section id="left-panel">
+        <div id="composite-panel-container"></div>
+      </section>
+
+      <!-- Centre: Canvas editor (Konva.js) -->
+      <section id="editor-pane">
+        <!-- Tab bar -->
+        <div id="editor-tab-bar">
+          <button id="tab-editor"  class="editor-tab active">Editor</button>
+          <button id="tab-preview" class="editor-tab">Roster Preview</button>
+        </div>
+        <!-- View switcher (Back / Front / Composite) -->
+        <div id="view-switcher">
+          <button class="view-tab active" data-view="back">Back</button>
+          <button class="view-tab"        data-view="front">Front</button>
+          <button class="view-tab"        data-view="composite">Composite</button>
+        </div>
+        <!-- Canvas fills this area -->
+        <div id="canvas-area">
+          <div id="canvas-container"></div>
+          <div id="front-canvas-container"></div>
+          <div id="composite-canvas-container"></div>
+          <div id="canvas-placeholder" class="placeholder">
+            <div class="placeholder-icon">🎽</div>
+            <div class="placeholder-label">Preview Canvas</div>
+            <div class="placeholder-sub">Load a kit image to start editing</div>
+          </div>
+        </div>
+        <!-- Back-view controls bar -->
+        <div id="controls-bar"></div>
+        <!-- Front-view controls bar -->
+        <div id="front-controls-bar"></div>
+        <!-- Roster preview pane (shown when Preview tab is active) -->
+        <div id="preview-pane"></div>
+      </section>
+
+      <!-- Right: Roster (filled by RosterGrid.js) -->
+      <section id="roster-pane"></section>
+    </main>
+
+    <footer id="statusbar">
+      <span id="status-text">Ready</span>
+    </footer>
+  </div>
+
+  <!-- Load order:
+       1. Konva (exposes window.Konva)
+       2. Components (may reference window.Konva and window.kitAPI)
+       3. App entry
+  -->
+  <script src="../../node_modules/konva/konva.min.js"></script>
+
+  <!-- Assets panel -->
+  <script src="assets/AssetsPanel.js"></script>
+
+  <!-- Future components (stubs — safe to load) -->
+  <script src="editor/GuideGrid.js"></script>
+  <script src="editor/KitCanvas.js"></script>
+  <script src="editor/FrontCanvas.js"></script>
+  <script src="editor/CompositeCanvas.js"></script>
+  <script src="editor/DragHandles.js"></script>
+  <script src="editor/Sliders.js"></script>
+  <script src="editor/FrontSliders.js"></script>
+  <script src="roster/RosterGrid.js"></script>
+  <script src="roster/RosterPreview.js"></script>
+  <script src="export/ExportPanel.js"></script>
+  <script src="export/ExportModal.js"></script>
+  <script src="roster/OverrideEditor.js"></script>
+  <script src="profile/ProfilePanel.js"></script>
+  <script src="profile/VariantSelector.js"></script>
+  <script src="composite/CompositePanel.js"></script>
+
+  <script src="app.js"></script>
+</body>
+</html>

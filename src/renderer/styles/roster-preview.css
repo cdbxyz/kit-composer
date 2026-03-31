@@ -1,0 +1,173 @@
+/**
+ * roster-preview.css — Roster Preview tab styles
+ */
+
+/* ── Preview pane (fills editor-pane when tab is active) ── */
+#preview-pane {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+#editor-pane.preview-active #preview-pane              { display: flex; }
+#editor-pane.preview-active #canvas-area               { display: none; }
+#editor-pane.preview-active #view-switcher             { display: none; }
+#editor-pane.preview-active #controls-bar              { display: none; }
+#editor-pane.preview-active #front-controls-bar        { display: none; }
+#editor-pane.preview-active #canvas-btn-bar            { display: none; }
+
+/* ── Toolbar row ── */
+.rp-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 16px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.rp-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.rp-progress {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Thumbnail grid ── */
+.rp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  padding: 16px;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;      /* allow the flex item to shrink below its content height so overflow-y: auto kicks in */
+  align-content: start;
+}
+
+/* ── Individual card ── */
+.rp-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  transition: box-shadow 0.15s;
+}
+
+.rp-card.rp-done:hover {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+}
+
+/* ── Thumbnail image area ── */
+.rp-thumb-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--color-surface-2);
+  border-radius: 7px 7px 0 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rp-thumb {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ── Loading spinner ── */
+.rp-spinner {
+  width: 22px;
+  height: 22px;
+  margin: 40px auto;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: rp-spin 0.75s linear infinite;
+}
+
+@keyframes rp-spin {
+  to { transform: rotate(360deg); }
+}
+
+.rp-err {
+  font-size: 20px;
+  color: var(--color-text-muted);
+  opacity: 0.4;
+}
+
+/* ── Player name / number label ── */
+.rp-label {
+  padding: 7px 8px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.rp-label strong {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rp-label span {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+/* ── Empty / error state ── */
+.rp-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  font-size: 14px;
+  color: var(--color-text-muted);
+  opacity: 0.6;
+  padding: 32px;
+  text-align: center;
+}
+
+/* ── Editor tab bar ── */
+#editor-tab-bar {
+  display: flex;
+  flex-shrink: 0;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0 8px;
+}
+
+.editor-tab {
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  margin-bottom: -1px;
+  letter-spacing: 0.1px;
+  transition: color 0.1s, border-color 0.1s;
+}
+
+.editor-tab:hover { color: var(--color-text); }
+
+.editor-tab.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}

@@ -1,0 +1,70 @@
+{
+  "name": "fanatics-jersey-composer",
+  "productName": "Fanatics Jersey Composer",
+  "version": "1.3.0",
+  "description": "Local-only kit personalisation tool — name, number, batch export",
+  "main": "src/main/index.js",
+  "private": true,
+  "scripts": {
+    "start":       "ELECTRON_RUN_AS_NODE= electron .",
+    "postinstall": "electron-builder install-app-deps",
+    "rebuild":     "electron-builder install-app-deps",
+    "pack":        "electron-builder --dir",
+    "dist":        "electron-builder",
+    "dist:mac":    "electron-builder --mac",
+    "dist:win":    "electron-builder --win"
+  },
+  "dependencies": {
+    "archiver":   "^7.0.1",
+    "canvas":     "^3.0.0",
+    "konva":      "^9.3.6",
+    "papaparse":  "^5.4.1",
+    "sharp":      "^0.33.4"
+  },
+  "build": {
+    "appId": "com.fanatics.jersey-composer",
+    "productName": "Fanatics Jersey Composer",
+    "icon": "assets/icon.png",
+    "asar": true,
+    "asarUnpack": [
+      "node_modules/sharp/**/*",
+      "node_modules/@img/**/*",
+      "node_modules/canvas/**/*",
+      "node_modules/node-pre-gyp/**/*"
+    ],
+    "files": [
+      "src/**/*",
+      "node_modules/**/*",
+      "!node_modules/*/{CHANGELOG.md,README.md,readme.md,readme}",
+      "!node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!node_modules/.bin"
+    ],
+    "mac": {
+      "icon": "assets/icon.icns",
+      "category": "public.app-category.graphics-design",
+      "target": [
+        { "target": "dmg", "arch": ["arm64"] }
+      ]
+    },
+    "dmg": {
+      "title": "Fanatics Jersey Composer",
+      "contents": [
+        { "x": 130, "y": 220 },
+        { "x": 410, "y": 220, "type": "link", "path": "/Applications" }
+      ],
+      "window": { "width": 540, "height": 380 }
+    },
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": [
+        { "target": "nsis", "arch": ["x64"] }
+      ]
+    },
+    "npmRebuild": true
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^3.6.0",
+    "electron":          "^31.0.0",
+    "electron-builder":  "^24.13.3"
+  }
+}

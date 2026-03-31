@@ -1,0 +1,6 @@
+/* reset.css — minimal CSS reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+button { cursor: pointer; border: none; background: none; font: inherit; }
+input, select, textarea { font: inherit; }
+img { display: block; max-width: 100%; }

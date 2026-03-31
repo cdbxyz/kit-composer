@@ -1,0 +1,226 @@
+/* assets-panel.css — Left panel drop zone styles */
+
+.asset-section {
+  margin-bottom: 8px;
+}
+
+.asset-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+/* ── Drop zone base ── */
+.asset-zone {
+  border: 2px dashed var(--color-border);
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  background: var(--color-surface-2);
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+
+.asset-zone:hover {
+  border-color: #bbb;
+}
+
+/* drag-over */
+.asset-zone.is-drag-over {
+  border-color: var(--color-accent);
+  border-style: solid;
+  background: #eef0ff;
+}
+
+/* invalid file type flash */
+.asset-zone.is-error {
+  border-color: #e53e3e;
+  border-style: solid;
+  background: #fff5f5;
+  transition: none;
+}
+
+/* ── Idle content ── */
+.az-idle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 10px 10px;
+  color: var(--color-text-muted);
+}
+
+/* hide idle when loaded */
+.asset-zone--loaded .az-idle {
+  display: none;
+}
+
+.az-idle-icon {
+  opacity: 0.45;
+  display: flex;
+}
+
+.az-idle-hint {
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ── Loaded content ── */
+.az-loaded {
+  display: none;
+  flex-direction: column;
+}
+
+.asset-zone--loaded .az-loaded {
+  display: flex;
+}
+
+/* image thumbnail */
+.az-thumb {
+  width: 100%;
+  max-height: 150px;
+  object-fit: contain;
+  object-position: center;
+  background: #ebebeb;
+  display: block;
+}
+
+/* filename row */
+.az-file-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  min-width: 0;
+}
+
+.az-file-icon {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  letter-spacing: -0.5px;
+}
+
+.az-filename {
+  flex: 1;
+  font-size: 12px;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+/* digit PNG preview grid */
+.az-digit-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  padding: 6px 10px 8px;
+}
+
+.az-digit-thumb {
+  width: 20px;
+  height: 24px;
+  object-fit: contain;
+  background: #222;
+  border-radius: 2px;
+}
+
+/* ── Custom Player section ── */
+.custom-player-card {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cp-fields {
+  display: flex;
+  gap: 8px;
+}
+
+.cp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.cp-field--narrow {
+  flex: 0 0 56px;
+}
+
+.cp-field-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.cp-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px 7px;
+  font-size: 12px;
+  font-family: inherit;
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.12s;
+}
+
+.cp-input:focus {
+  border-color: var(--color-accent);
+}
+
+.cp-preview-btn {
+  width: 100%;
+  padding: 6px 0;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #fff;
+  background: var(--color-accent);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: opacity 0.12s;
+}
+
+.cp-preview-btn:hover {
+  opacity: 0.85;
+}
+
+/* clear (×) button */
+.az-clear {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.12s, background 0.12s;
+  padding-bottom: 1px; /* optical align */
+}
+
+.az-clear:hover {
+  color: var(--color-text);
+  background: var(--color-border);
+}

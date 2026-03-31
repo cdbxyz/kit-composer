@@ -1,0 +1,166 @@
+/**
+ * composite.css — Composite view: left panel + canvas container
+ */
+
+/* ── Composite canvas container ── */
+#composite-canvas-container {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+
+#editor-pane.view-composite #composite-canvas-container { display: block; }
+#editor-pane.view-composite #canvas-container           { display: none; }
+#editor-pane.view-composite #front-canvas-container     { display: none; }
+#editor-pane.view-composite #canvas-placeholder         { display: none; }
+#editor-pane.view-composite #controls-bar               { display: none; }
+#editor-pane.view-composite #front-controls-bar         { display: none; }
+
+/* ── Composite panel (left panel content) ── */
+#composite-panel-container {
+  display: none;
+}
+
+/* Composite panel cards */
+.comp-card {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 12px 10px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.comp-card--selected {
+  background: #eff6ff;
+  border-color: #2563eb;
+}
+
+.comp-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.comp-card-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.1px;
+}
+
+.comp-card-selected-badge {
+  font-size: 10px;
+  font-weight: 600;
+  color: #2563eb;
+  background: #dbeafe;
+  padding: 2px 7px;
+  border-radius: 20px;
+  display: none;
+}
+
+.comp-card--selected .comp-card-selected-badge {
+  display: inline-block;
+}
+
+/* Tighten up ctrl-rows inside cards */
+.comp-card .ctrl-row {
+  gap: 8px;
+}
+
+.comp-card .ctrl-label {
+  width: 38px;
+  font-size: 9px;
+}
+
+.comp-card .ctrl-slider {
+  flex: 0 1 120px;
+  min-width: 50px;
+}
+
+.comp-card .ctrl-val {
+  min-width: 38px;
+  font-size: 10px;
+}
+
+/* Z-order row */
+.comp-zorder-row {
+  margin-top: 4px;
+}
+
+.comp-zorder-group {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.comp-zorder-btn {
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: none;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+  line-height: 1.4;
+}
+
+.comp-zorder-btn + .comp-zorder-btn {
+  border-left: 1px solid var(--color-border);
+}
+
+.comp-zorder-btn.active {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* Grid toggle row */
+.comp-grid-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+}
+
+.comp-grid-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.comp-grid-spacing-slider {
+  flex: 1;
+  min-width: 50px;
+  accent-color: var(--color-accent);
+}
+
+/* Reset button */
+.comp-reset-btn {
+  width: 100%;
+  padding: 8px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+  margin-top: 4px;
+}
+
+.comp-reset-btn:hover {
+  background: var(--color-surface-2);
+  border-color: #aaa;
+}

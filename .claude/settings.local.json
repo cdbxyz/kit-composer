@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm info:*)",
+      "Bash(node -p \"process.arch\")",
+      "Bash(node -p \"process.platform\")",
+      "Bash(npm install:*)",
+      "Bash(npm config:*)",
+      "Bash(grep -E \"^\\(electron|sharp|konva|archiver|papaparse|canvas|@electron\\)$\")",
+      "Bash(NODE_TLS_REJECT_UNAUTHORIZED=0 npm install --ignore-scripts)",
+      "Bash(grep -E \"^\\(sharp|canvas|@electron|@img\\)$\")",
+      "Bash(NODE_TLS_REJECT_UNAUTHORIZED=0 ./node_modules/.bin/electron-rebuild --force --which-module sharp --which-module canvas)",
+      "Bash(NODE_TLS_REJECT_UNAUTHORIZED=0 ./node_modules/.bin/electron-rebuild --force -w sharp,canvas)",
+      "Bash(node -e \"require\\(''./node_modules/sharp''\\); console.log\\(''sharp OK''\\)\")",
+      "Bash(node -e \"require\\(''./node_modules/canvas''\\); console.log\\(''canvas OK''\\)\")",
+      "Bash(node -e \"require\\(''./node_modules/konva/konva.min.js''\\); console.log\\(''konva OK''\\)\")",
+      "Bash(node -e \"require\\(''./node_modules/archiver''\\); console.log\\(''archiver OK''\\)\")",
+      "Bash(node -e \"require\\(''./node_modules/papaparse''\\); console.log\\(''papaparse OK''\\)\")",
+      "Bash(NODE_TLS_REJECT_UNAUTHORIZED=0 node install.js)",
+      "Bash(timeout 8 ./node_modules/.bin/electron .)",
+      "Bash(find . -not -path */node_modules/* -not -path */.git/* -not -path */.claude/*)"
+    ]
+  }
+}
