@@ -51,6 +51,10 @@ function registerRenderHandlers(mainWindow) {
   // ── Batch export ───────────────────────────────────────────────────────
   // args: { players: [{filename, pngDataUrl}], outputPath, format, targetSize }
   ipcMain.handle('export:batch', async (event, { players, outputPath, format, targetSize }) => {
+    const sender = event.sender;
+    const safeSend = (channel, data) => {
+      if (!sender.isDestroyed()) sender.send(channel, data);
+    };
     try {
       await batchExport({
         players,
@@ -58,10 +62,10 @@ function registerRenderHandlers(mainWindow) {
         format:     format     || 'avif',
         targetSize: targetSize || 2048,
         onProgress(current, total) {
-          mainWindow.webContents.send('export:progress', { current, total });
+          safeSend('export:progress', { current, total });
         },
       });
-      mainWindow.webContents.send('export:complete', { zipPath: outputPath });
+      safeSend('export:complete', { zipPath: outputPath });
       return { ok: true, zipPath: outputPath };
     } catch (err) {
       console.error('[export:batch]', err);
