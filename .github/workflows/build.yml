@@ -1,0 +1,87 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+
+  # ── macOS ──────────────────────────────────────────────────────────────────
+  build-mac:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Rebuild Sharp + canvas native binaries for the Electron runtime on macOS.
+      # electron-builder install-app-deps uses @electron/rebuild under the hood
+      # and respects the electron version in devDependencies automatically.
+      - name: Rebuild native addons for Electron (macOS)
+        run: npm run rebuild
+
+      - name: Build macOS distributable
+        run: npm run dist:mac
+        env:
+          # Disable code-signing for CI builds — remove this line if you add
+          # a signing certificate to GitHub Secrets and configure CSC_LINK /
+          # CSC_KEY_PASSWORD.
+          CSC_IDENTITY_AUTO_DISCOVERY: false
+
+      # Collect the .dmg files from the output directory.
+      # electron-builder.yml sets directories.output = out
+      - name: Upload macOS artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mac-build
+          path: |
+            out/*.dmg
+            out/*.zip
+          if-no-files-found: error
+          retention-days: 30
+
+  # ── Windows ────────────────────────────────────────────────────────────────
+  build-win:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Rebuild Sharp + canvas native binaries for the Electron runtime on Windows.
+      # Sharp ships pre-built binaries for common targets but electron-builder
+      # install-app-deps ensures the correct .node file for this Electron version
+      # and architecture is in place before the asar is packed.
+      - name: Rebuild native addons for Electron (Windows)
+        run: npm run rebuild
+
+      - name: Build Windows distributable
+        run: npm run dist:win
+
+      # Collect the NSIS installer .exe from the output directory.
+      - name: Upload Windows artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: win-build
+          path: |
+            out/*.exe
+          if-no-files-found: error
+          retention-days: 30
