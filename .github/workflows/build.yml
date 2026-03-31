@@ -48,8 +48,8 @@ jobs:
         with:
           name: mac-build
           path: |
-            out/*.dmg
-            out/*.zip
+            dist/**/*.dmg
+            dist/**/*.zip
           if-no-files-found: error
           retention-days: 30
 
@@ -86,6 +86,6 @@ jobs:
         with:
           name: win-build
           path: |
-            out/**/*.exe
+            dist/**/*.exe
           if-no-files-found: error
           retention-days: 30
